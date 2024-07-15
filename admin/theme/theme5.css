@@ -1,0 +1,23 @@
+.bg-navbar {
+    background: #E6E6FA;
+}
+
+.sidebar-light .sidebar-brand {
+    background: #800080;
+}
+
+.fas {
+    color: #0f0f0f;
+}
+
+.fa {
+    color: #0f0f0f;
+}
+
+.copyright span {
+    color: #0f0f0f;
+}
+
+.text-user {
+    color: #0f0f0f !important;
+}

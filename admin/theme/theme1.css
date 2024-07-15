@@ -1,0 +1,28 @@
+/* body {
+    background-color: #1E90FF;
+    color: #87CEEB;
+} */
+
+.bg-navbar {
+    background: #87CEEB;
+}
+
+.sidebar-light .sidebar-brand {
+    background: #1E90FF;
+}
+
+.fas {
+    color: #0f0f0f;
+}
+
+.fa {
+    color: #0f0f0f;
+}
+
+.copyright span {
+    color: #0f0f0f;
+}
+
+.text-user {
+    color: #0f0f0f !important;
+}
