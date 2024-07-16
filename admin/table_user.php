@@ -722,11 +722,11 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <label for="inputFoto" style="display: block;" class="mb-3">
             <img src="default/user.png" alt="" class="foto-user-profile card" id="imgFoto" style="width: 35%; margin: auto;">
           </label>
-          <input type="file" name="fotouser" id="inputFoto" class="form-control" hidden>
+          <input type="file" name="fotouser" id="inputFoto" class="form-control" hidden required>
           <label for="usernameTambah">Username</label>
-          <input type="text" class="form-control mb-2" id="usernameTambah" name="username" placeholder="klik dan ketik disini...">
+          <input type="text" class="form-control mb-2" id="usernameTambah" name="username" placeholder="klik dan ketik disini..." required>
           <label for="password-user-tambah">Password</label>
-          <input type="password" class="form-control mb-2" id="password-user-tambah" name="password" placeholder="klik dan ketik disini...">
+          <input type="password" class="form-control mb-2" id="password-user-tambah" name="password" placeholder="klik dan ketik disini..." required>
           <input type="checkbox" id="show-password-user-tambah"> <label for="show-password-user-tambah">Tampilkan Sandi</label>
           <script>
             document.getElementById('show-password-user-tambah').addEventListener('change', function() {
@@ -747,20 +747,20 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             });
           </script>
           <label for="email">Email</label>
-          <input type="email" class="form-control mb-2" id="email" name="email" placeholder="klik dan ketik disini...">
+          <input type="email" class="form-control mb-2" id="email" name="email" placeholder="klik dan ketik disini..." required>
           <label for="namalengkap">Nama Lengkap</label>
-          <input type="text" class="form-control mb-2" id="namalengkap" name="namalengkap" placeholder="klik dan ketik disini...">
+          <input type="text" class="form-control mb-2" id="namalengkap" name="namalengkap" placeholder="klik dan ketik disini..." required>
           <label for="alamat">Alamat</label>
-          <textarea name="alamat" class="form-control mb-2" id="alamat" cols="30" rows="5" placeholder="klik dan ketik disini..."></textarea>
+          <textarea name="alamat" class="form-control mb-2" id="alamat" cols="30" rows="5" placeholder="klik dan ketik disini..." required></textarea>
           <label for="role">Status</label>
-          <select name="role" id="role" class="form-control mb-2">
+          <select name="role" id="role" class="form-control mb-2" required>
             <option value="">Pilihan</option>
-            <!-- <option value="Admin">Admin</option> -->
+            <option value="Admin">Admin</option>
             <option value="Kepala Sekolah">Kepala Sekolah</option>
             <option value="Wali Kelas">Wali Kelas</option>
           </select>
           <label for="kelasid">Kelas</label>
-          <select name="kelasid" id="kelasid" class="form-control mb-2">
+          <select name="kelasid" id="kelasid" class="form-control mb-2" required>
             <option value="">Tidak Ada</option>
             <?php
             $sql_kelas = mysqli_query($conn, "SELECT * FROM kelas");
@@ -772,7 +772,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             ?>
           </select>
           <label for="jurusanid">Jurusan</label>
-          <select name="jurusanid" id="jurusanid" class="form-control mb-2">
+          <select name="jurusanid" id="jurusanid" class="form-control mb-2" required>
             <option value="">Tidak Ada</option>
             <?php
             $sql_kelas = mysqli_query($conn, "SELECT * FROM jurusan");
@@ -791,22 +791,35 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           </select>
           <script>
             $(document).ready(function() {
-              $('#role').change(function() {
-                var selectedRole = $(this).val();
+              function HakAkses() {
+                var selectedRole = $('#role').val();
                 var hakAkses = $('#hakakses');
 
                 hakAkses.find('option').show(); // Reset visibility of all options
 
                 if (selectedRole === 'Admin') {
                   hakAkses.val('Diizinkan');
-                  hakAkses.find('option[value="Dilarang"], option[value=""]').hide();
-                } else if (selectedRole === 'Kepala Sekolah' || selectedRole === 'Wali Kelas') {
-                  hakAkses.val('Diizinkan');
-                  hakAkses.find('option[value=""]').hide();
+                  hakAkses.find('option:not([value="Diizinkan"])').hide();
+                  $('#role').find('option:not([value="Admin"])').hide();
                 } else {
-                  hakAkses.val('');
+                  hakAkses.find('option').show();
+                  $('#role').find('option').show();
                 }
-              });
+
+                // Hide the Admin option if the selected role is not Admin
+                if (selectedRole !== 'Admin') {
+                  $('#hakakses').find('option[value=""]').hide();
+                  $('#role').find('option[value="Admin"]').hide();
+                } else {
+                  $('#role').find('option[value="Admin"]').show();
+                }
+
+              }
+
+              $('#role').change(HakAkses);
+
+              // Trigger change event on page load to set the correct options initially
+              HakAkses();
             });
           </script>
         </div>
@@ -834,15 +847,15 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             </button>
           </div>
           <div class="modal-body">
-            <input type="hidden" class="form-control mb-2" id="userid" name="userid" placeholder="klik dan ketik disini..." value="<?= $data['userid'] ?>">
+            <input type="hidden" class="form-control mb-2" id="userid" name="userid" placeholder="klik dan ketik disini..." value="<?= $data['userid'] ?>" required>
             <label for="inputFoto2_<?= $index ?>" style="display: block; text-align: center;" class="mb-3">
               <img src="fotouser/<?= $data['fotouser'] ?>" alt="" class="foto-user-profile card" id="imgFoto2_<?= $index ?>" style="width: 35%; margin: auto;">
             </label>
             <input type="file" name="fotouser" id="inputFoto2_<?= $index ?>" class="form-control" hidden>
             <label for="usernameEdit<?= $index ?>">Username</label>
-            <input type="text" class="form-control mb-2" id="usernameEdit<?= $index ?>" name="username" placeholder="klik dan ketik disini..." value="<?= $data['username'] ?>">
+            <input type="text" class="form-control mb-2" id="usernameEdit<?= $index ?>" name="username" placeholder="klik dan ketik disini..." value="<?= $data['username'] ?>" required>
             <label for="password-user<?= $index ?>">Password</label>
-            <input type="password" class="form-control mb-2" id="password-user<?= $index ?>" name="password" placeholder="klik dan ketik disini..." value="<?= $data['password'] ?>">
+            <input type="password" class="form-control mb-2" id="password-user<?= $index ?>" name="password" placeholder="klik dan ketik disini..." value="<?= $data['password'] ?>" required>
             <input type="checkbox" id="show-password-user<?= $index ?>"> <label for="show-password-user<?= $index ?>">Tampilkan Sandi</label>
             <script>
               document.getElementById('show-password-user<?= $index ?>').addEventListener('change', function() {
@@ -863,25 +876,42 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               });
             </script>
             <label for="email">Email</label>
-            <input type="email" class="form-control mb-2" id="email" name="email" placeholder="klik dan ketik disini..." value="<?= $data['email'] ?>">
+            <input type="email" class="form-control mb-2" id="email" name="email" placeholder="klik dan ketik disini..." value="<?= $data['email'] ?>" required>
             <label for="namalengkap">Nama Lengkap</label>
-            <input type="text" class="form-control mb-2" id="namalengkap" name="namalengkap" placeholder="klik dan ketik disini..." value="<?= $data['namalengkap'] ?>">
+            <input type="text" class="form-control mb-2" id="namalengkap" name="namalengkap" placeholder="klik dan ketik disini..." value="<?= $data['namalengkap'] ?>" required>
             <label for="alamat">Alamat</label>
-            <textarea name="alamat" class="form-control mb-2" id="alamat" cols="30" rows="5" placeholder="klik dan ketik disini..."><?= $data['alamat'] ?></textarea>
-            <label for="roleEdit">Status</label>
-            <select name="role" id="roleEdit" class="form-control mb-2">
+            <textarea name="alamat" class="form-control mb-2" id="alamat" cols="30" rows="5" placeholder="klik dan ketik disini..." required><?= $data['alamat'] ?></textarea>
+            <label for="roleEdit<?= $index ?>">Status</label>
+            <select name="role" id="roleEdit<?= $index ?>" class="form-control mb-2" required>
               <?php
-              $role_options = ["Kepala Sekolah", "Wali Kelas"];
-              // Display the default option
-              echo '<option value="">Pilihan</option>';
-
-              // Loop through the role options and generate unique options
-              foreach ($role_options as $option) {
-                echo '<option value="' . $option . '"';
-                if (isset($data['role']) && $data['role'] == $option) {
-                  echo ' selected';
-                }
-                echo '>' . $option . '</option>';
+              if ($data['role'] == "Admin") {
+              ?>
+                <option value="">Pilihan</option>
+                <option value="Admin" selected>Admin</option>
+                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                <option value="Wali Kelas">Wali Kelas</option>
+              <?php
+              } else if ($data['role'] == "Kepala Sekolah") {
+              ?>
+                <option value="">Pilihan</option>
+                <option value="Admin">Admin</option>
+                <option value="Kepala Sekolah" selected>Kepala Sekolah</option>
+                <option value="Wali Kelas">Wali Kelas</option>
+              <?php
+              } else if ($data['role'] == "Wali Kelas") {
+              ?>
+                <option value="">Pilihan</option>
+                <option value="Admin">Admin</option>
+                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                <option value="Wali Kelas" selected>Wali Kelas</option>
+              <?php
+              } else {
+              ?>
+                <option value="" selected>Pilihan</option>
+                <option value="Admin">Admin</option>
+                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                <option value="Wali Kelas">Wali Kelas</option>
+              <?php
               }
               ?>
             </select>
@@ -986,28 +1016,69 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               }
               ?>
             </select>
-            <label for="hakaksesEdit">Hak Akses</label>
-            <select name="hakakses" id="hakaksesEdit" class="form-control mb-2" required>
+            <label for="hakaksesEdit<?= $index ?>">Hak Akses</label>
+            <select name="hakakses" id="hakaksesEdit<?= $index ?>" class="form-control mb-2" required>
               <?php
-              $akses_options = ["Diizinkan", "Dilarang"];
-              // Display the default option
-              echo '<option value="">Pilihan</option>';
-
-              // Loop through the access options and generate unique options
-              foreach ($akses_options as $option) {
-                echo '<option value="' . $option . '"';
-                if (isset($data['hakakses']) && $data['hakakses'] == $option) {
-                  echo ' selected';
-                }
-                echo '>' . $option . '</option>';
+              if ($data['hakakses'] == "Diizinkan") {
+              ?>
+                <option value="">Pilihan</option>
+                <option value="Diizinkan" selected>Diizinkan</option>
+                <option value="Dilarang">Dilarang</option>
+              <?php
+              } else if ($data['hakakses'] == "Dilarang") {
+              ?>
+                <option value="">Pilihan</option>
+                <option value="Diizinkan">Diizinkan</option>
+                <option value="Dilarang" selected>Dilarang</option>
+              <?php
+              } else {
+              ?>
+                <option value="" selected>Pilihan</option>
+                <option value="Diizinkan">Diizinkan</option>
+                <option value="Dilarang">Dilarang</option>
+              <?php
               }
               ?>
             </select>
+            <script>
+              $(document).ready(function() {
+                function updateHakAkses() {
+                  var selectedRoleEdit = $('#roleEdit<?= $index ?>').val();
+                  var hakAksesEdit = $('#hakaksesEdit<?= $index ?>');
+
+                  hakAksesEdit.find('option').show(); // Reset visibility of all options
+
+                  if (selectedRoleEdit === 'Admin') {
+                    hakAksesEdit.val('Diizinkan');
+                    hakAksesEdit.find('option:not([value="Diizinkan"])').hide();
+                    $('#roleEdit<?= $index ?>').find('option:not([value="Admin"])').hide();
+                  } else {
+                    hakAksesEdit.find('option').show();
+                    $('#roleEdit<?= $index ?>').find('option').show();
+                  }
+
+                  // Hide the Admin option if the selected role is not Admin
+                  if (selectedRoleEdit !== 'Admin') {
+                    $('#hakaksesEdit<?= $index ?>').find('option[value=""]').hide();
+                    $('#roleEdit<?= $index ?>').find('option[value=""]').hide();
+                    $('#roleEdit<?= $index ?>').find('option[value="Admin"]').hide();
+                  } else {
+                    $('#roleEdit<?= $index ?>').find('option[value="Admin"]').show();
+                  }
+
+                }
+
+                $('#roleEdit<?= $index ?>').change(updateHakAkses);
+
+                // Trigger change event on page load to set the correct options initially
+                updateHakAkses();
+              });
+            </script>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
             <input type="submit" value="Ubah" class="btn btn-success">
-            <button type="reset" class="btn btn-danger">Hapus</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
