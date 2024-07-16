@@ -718,7 +718,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             <option value="other">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
           </select>
 
-          <input type="text" id="namakelas_other" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;">
+          <input type="text" id="namakelas_other" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" required>
 
           <script>
             document.addEventListener('DOMContentLoaded', () => {
@@ -792,9 +792,9 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             </button>
           </div>
           <div class="modal-body">
-            <input type="text" name="kelasid" value="<?= $data['kelasid'] ?>" hidden>
+            <input type="text" name="kelasid" value="<?= $data['kelasid'] ?>" hidden required>
             <label for="namakelasEdit<?= $index ?>">Kelas</label>
-            <select name="namakelas" id="namakelasEdit<?= $index ?>" class="form-control mb-2">
+            <select name="namakelas" id="namakelasEdit<?= $index ?>" class="form-control mb-2" required>
               <option value="<?= $data['namakelas'] ?>"><?= $data['namakelas'] ?></option>
               <option value="X TJKT A">X TJKT A</option>
               <option value="X TJKT B">X TJKT B</option>
@@ -822,7 +822,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               <option value="XII TAV">XII TAV</option>
               <option value="other">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
             </select>
-            <input type="text" id="namakelasEdit_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;">
+            <input type="text" id="namakelasEdit_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" required>
             <script>
               document.addEventListener('DOMContentLoaded', () => {
                 const selectElementEdit = document.getElementById('namakelasEdit<?= $index ?>');
@@ -858,7 +858,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               });
             </script>
             <label for="jurusanid">Jurusan</label>
-            <select name="jurusanid" id="jurusanid" class="form-control mb-2">
+            <select name="jurusanid" id="jurusanid" class="form-control mb-2" required>
               <?php
               $sql_jurusan2 = mysqli_query($conn, "SELECT * FROM jurusan");
               while ($data_jurusan2 = mysqli_fetch_array($sql_jurusan2)) {
