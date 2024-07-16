@@ -760,7 +760,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             <option value="Wali Kelas">Wali Kelas</option>
           </select>
           <label for="kelasid">Kelas</label>
-          <select name="kelasid" id="kelasid" class="form-control mb-2" required>
+          <select name="kelasid" id="kelasid" class="form-control mb-2">
             <option value="">Tidak Ada</option>
             <?php
             $sql_kelas = mysqli_query($conn, "SELECT * FROM kelas");
@@ -772,7 +772,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             ?>
           </select>
           <label for="jurusanid">Jurusan</label>
-          <select name="jurusanid" id="jurusanid" class="form-control mb-2" required>
+          <select name="jurusanid" id="jurusanid" class="form-control mb-2">
             <option value="">Tidak Ada</option>
             <?php
             $sql_kelas = mysqli_query($conn, "SELECT * FROM jurusan");
