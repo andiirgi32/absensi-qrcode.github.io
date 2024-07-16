@@ -707,11 +707,11 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <label for="inputFoto" style="display: block; text-align: center;" class="mb-3">
             <img src="default/user.png" alt="" class="foto-user-profile card" id="imgFoto" style="width: 35%; margin: auto;">
           </label>
-          <input type="file" name="fotosiswa" id="inputFoto" class="form-control" hidden>
+          <input type="file" name="fotosiswa" id="inputFoto" class="form-control" hidden required>
           <label for="nama">Nama</label>
-          <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="klik dan ketik disini...">
+          <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="klik dan ketik disini..." required>
           <label for="nis">NIS</label>
-          <input type="number" class="form-control mb-2" id="nis" name="nis" placeholder="klik dan ketik disini...">
+          <input type="number" class="form-control mb-2" id="nis" name="nis" placeholder="klik dan ketik disini..." required>
           <label for="kelasid">Kelas</label>
           <select name="kelasid" id="kelasid" class="form-control mb-2" required>
             <option value="">Pilihan</option>
@@ -737,7 +737,8 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             ?>
           </select>
           <label for="jk">Jenis Kelamin</label>
-          <select name="jk" id="jk" class="form-control mb-2">
+          <select name="jk" id="jk" class="form-control mb-2" required>
+            <option value="">Pilihan</option>
             <option value="Laki-Laki">Laki-Laki</option>
             <option value="Perempuan">Perempuan</option>
           </select>
@@ -766,17 +767,17 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             </button>
           </div>
           <div class="modal-body">
-            <input type="hidden" name="idsiswa" id="idsiswa" class="form-control" value="<?= $data['idsiswa'] ?>">
+            <input type="hidden" name="idsiswa" id="idsiswa" class="form-control" value="<?= $data['idsiswa'] ?>" required>
             <label for="inputFoto2_<?= $index ?>" style="display: block; text-align: center;" class="mb-3">
               <img src="fotosiswa/<?= $data['fotosiswa'] ?>" alt="" class="foto-user-profile card" id="imgFoto2_<?= $index ?>" style="width: 35%; margin: auto;">
             </label>
             <input type="file" name="fotosiswa" id="inputFoto2_<?= $index ?>" class="form-control" hidden>
             <label for="nama">Nama</label>
-            <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="klik dan ketik disini..." value="<?= $data['nama'] ?>">
+            <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="klik dan ketik disini..." value="<?= $data['nama'] ?>" required>
             <label for="nis">NIS</label>
-            <input type="number" class="form-control mb-2" id="nis" name="nis" placeholder="klik dan ketik disini..." value="<?= $data['nis'] ?>">
+            <input type="number" class="form-control mb-2" id="nis" name="nis" placeholder="klik dan ketik disini..." value="<?= $data['nis'] ?>" required>
             <label for="kelasid">Kelas</label>
-            <select name="kelasid" id="kelasid" class="form-control mb-2">
+            <select name="kelasid" id="kelasid" class="form-control mb-2" required>
               <?php
               $sql2 = mysqli_query($conn, "SELECT * FROM kelas");
               while ($data2 = mysqli_fetch_array($sql2)) :
@@ -789,7 +790,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               ?>
             </select>
             <label for="jurusanid">Jurusan</label>
-            <select name="jurusanid" id="jurusanid" class="form-control mb-2">
+            <select name="jurusanid" id="jurusanid" class="form-control mb-2" required>
               <?php
               $sql2 = mysqli_query($conn, "SELECT * FROM jurusan");
               while ($data2 = mysqli_fetch_array($sql2)) :
@@ -802,7 +803,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               ?>
             </select>
             <label for="jk">Jenis Kelamin</label>
-            <select name="jk" id="jk" class="form-control mb-2">
+            <select name="jk" id="jk" class="form-control mb-2" required>
               <?php
               if ($data["jk"] === "Laki-Laki") {
               ?>
@@ -821,7 +822,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
             <input type="submit" value="Ubah" class="btn btn-success">
-            <button type="reset" class="btn btn-danger">Hapus</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
