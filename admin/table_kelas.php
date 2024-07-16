@@ -779,6 +779,11 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
   <!-- End Modal Scrollable -->
 
   <?php
+  $kelasArray = [
+    "X TJKT A", "X TJKT B", "X PPLG", "X DKV", "X OTO A", "X OTO B", "X OTO C", "X TAV",
+    "XI TJKT A", "XI TJKT B", "XI RPL", "XI DKV", "XI TSM A", "XI TSM B", "XI TKR", "XI TAV",
+    "XII TJKT A", "XII TJKT B", "XII RPL", "XII DKV", "XII TSM A", "XII TSM B", "XII TKR", "XII TAV"
+  ];
   foreach ($sql as $index => $data) {
   ?>
     <!-- Modal Scrollable -->
@@ -795,34 +800,41 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             <input type="text" name="kelasid" value="<?= $data['kelasid'] ?>" hidden required>
             <label for="namakelasEdit<?= $index ?>">Kelas</label>
             <select name="namakelas" id="namakelasEdit<?= $index ?>" class="form-control mb-2" required>
-              <option value="<?= $data['namakelas'] ?>"><?= $data['namakelas'] ?></option>
-              <option value="X TJKT A">X TJKT A</option>
-              <option value="X TJKT B">X TJKT B</option>
-              <option value="X PPLG">X PPLG</option>
-              <option value="X DKV">X DKV</option>
-              <option value="X OTO A">X OTO A</option>
-              <option value="X OTO B">X OTO B</option>
-              <option value="X OTO C">X OTO C</option>
-              <option value="X TAV">X TAV</option>
-              <option value="XI TJKT A">XI TJKT A</option>
-              <option value="XI TJKT B">XI TJKT B</option>
-              <option value="XI RPL">XI RPL</option>
-              <option value="XI DKV">XI DKV</option>
-              <option value="XI TSM A">XI TSM A</option>
-              <option value="XI TSM B">XI TSM B</option>
-              <option value="XI TKR">XI TKR</option>
-              <option value="XI TAV">XI TAV</option>
-              <option value="XII TJKT A">XII TJKT A</option>
-              <option value="XII TJKT B">XII TJKT B</option>
-              <option value="XII RPL">XII RPL</option>
-              <option value="XII DKV">XII DKV</option>
-              <option value="XII TSM A">XII TSM A</option>
-              <option value="XII TSM B">XII TSM B</option>
-              <option value="XII TKR">XII TKR</option>
-              <option value="XII TAV">XII TAV</option>
+              <?php
+              // Jika $data['namakelas'] tidak ada di $kelasArray, tambahkan sebagai opsi
+              if (!in_array($data['namakelas'], $kelasArray)) : ?>
+                <option value="<?= $data['namakelas'] ?>" selected><?= $data['namakelas'] ?></option>
+              <?php endif; ?>
+              <option value="X TJKT A" <?= $data['namakelas'] == "X TJKT A" ? "selected" : "" ?>>X TJKT A</option>
+              <option value="X TJKT B" <?= $data['namakelas'] == "X TJKT B" ? "selected" : "" ?>>X TJKT B</option>
+              <option value="X PPLG" <?= $data['namakelas'] == "X PPLG" ? "selected" : "" ?>>X PPLG</option>
+              <option value="X DKV" <?= $data['namakelas'] == "X DKV" ? "selected" : "" ?>>X DKV</option>
+              <option value="X OTO A" <?= $data['namakelas'] == "X OTO A" ? "selected" : "" ?>>X OTO A</option>
+              <option value="X OTO B" <?= $data['namakelas'] == "X OTO B" ? "selected" : "" ?>>X OTO B</option>
+              <option value="X OTO C" <?= $data['namakelas'] == "X OTO C" ? "selected" : "" ?>>X OTO C</option>
+              <option value="X TAV" <?= $data['namakelas'] == "X TAV" ? "selected" : "" ?>>X TAV</option>
+              <option value="XI TJKT A" <?= $data['namakelas'] == "XI TJKT A" ? "selected" : "" ?>>XI TJKT A</option>
+              <option value="XI TJKT B" <?= $data['namakelas'] == "XI TJKT B" ? "selected" : "" ?>>XI TJKT B</option>
+              <option value="XI RPL" <?= $data['namakelas'] == "XI RPL" ? "selected" : "" ?>>XI RPL</option>
+              <option value="XI DKV" <?= $data['namakelas'] == "XI DKV" ? "selected" : "" ?>>XI DKV</option>
+              <option value="XI TSM A" <?= $data['namakelas'] == "XI TSM A" ? "selected" : "" ?>>XI TSM A</option>
+              <option value="XI TSM B" <?= $data['namakelas'] == "XI TSM B" ? "selected" : "" ?>>XI TSM B</option>
+              <option value="XI TKR" <?= $data['namakelas'] == "XI TKR" ? "selected" : "" ?>>XI TKR</option>
+              <option value="XI TAV" <?= $data['namakelas'] == "XI TAV" ? "selected" : "" ?>>XI TAV</option>
+              <option value="XII TJKT A" <?= $data['namakelas'] == "XII TJKT A" ? "selected" : "" ?>>XII TJKT A</option>
+              <option value="XII TJKT B" <?= $data['namakelas'] == "XII TJKT B" ? "selected" : "" ?>>XII TJKT B</option>
+              <option value="XII RPL" <?= $data['namakelas'] == "XII RPL" ? "selected" : "" ?>>XII RPL</option>
+              <option value="XII DKV" <?= $data['namakelas'] == "XII DKV" ? "selected" : "" ?>>XII DKV</option>
+              <option value="XII TSM A" <?= $data['namakelas'] == "XII TSM A" ? "selected" : "" ?>>XII TSM A</option>
+              <option value="XII TSM B" <?= $data['namakelas'] == "XII TSM B" ? "selected" : "" ?>>XII TSM B</option>
+              <option value="XII TKR" <?= $data['namakelas'] == "XII TKR" ? "selected" : "" ?>>XII TKR</option>
+              <option value="XII TAV" <?= $data['namakelas'] == "XII TAV" ? "selected" : "" ?>>XII TAV</option>
+              <?php
+              if (mysqli_num_rows($sql))
+              ?>
               <option value="other">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
             </select>
-            <input type="text" id="namakelasEdit_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" required>
+            <input type="text" id="namakelasEdit_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" value="<?= $data['namakelas'] ?>" style="display: none;" required>
             <script>
               document.addEventListener('DOMContentLoaded', () => {
                 const selectElementEdit = document.getElementById('namakelasEdit<?= $index ?>');
