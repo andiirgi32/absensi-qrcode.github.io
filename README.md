@@ -1,2 +1,2 @@
 # absensi-qrcode.github.io
-Aplikasi berbasis web untuk kinerja absensis berbasi QR-Code bagi pelajar
+Aplikasi berbasis web untuk kinerja absensi berbasis QR-Code bagi pelajar
