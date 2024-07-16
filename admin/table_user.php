@@ -726,7 +726,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <label for="usernameTambah">Username</label>
           <input type="text" class="form-control mb-2" id="usernameTambah" name="username" placeholder="klik dan ketik disini..." required>
           <label for="password-user-tambah">Password</label>
-          <input type="password" class="form-control mb-2" id="password-user-tambah" name="password" placeholder="klik dan ketik disini..." required>
+          <input type="password" class="form-control mb-2" id="password-user-tambah" name="password" placeholder="klik dan ketik disini..." minlength="8" required>
           <input type="checkbox" id="show-password-user-tambah"> <label for="show-password-user-tambah">Tampilkan Sandi</label>
           <script>
             document.getElementById('show-password-user-tambah').addEventListener('change', function() {
@@ -746,7 +746,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               $(this).val(usernameEdit);
             });
           </script>
-          <label for="email">Email</label>
+          <label for="email" style="display: block;">Email</label>
           <input type="email" class="form-control mb-2" id="email" name="email" placeholder="klik dan ketik disini..." required>
           <label for="namalengkap">Nama Lengkap</label>
           <input type="text" class="form-control mb-2" id="namalengkap" name="namalengkap" placeholder="klik dan ketik disini..." required>
@@ -855,7 +855,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             <label for="usernameEdit<?= $index ?>">Username</label>
             <input type="text" class="form-control mb-2" id="usernameEdit<?= $index ?>" name="username" placeholder="klik dan ketik disini..." value="<?= $data['username'] ?>" required>
             <label for="password-user<?= $index ?>">Password</label>
-            <input type="password" class="form-control mb-2" id="password-user<?= $index ?>" name="password" placeholder="klik dan ketik disini..." value="<?= $data['password'] ?>" required>
+            <input type="password" class="form-control mb-2" id="password-user<?= $index ?>" name="password" placeholder="klik dan ketik disini..." value="<?= $data['password'] ?>" minlength="8" required>
             <input type="checkbox" id="show-password-user<?= $index ?>"> <label for="show-password-user<?= $index ?>">Tampilkan Sandi</label>
             <script>
               document.getElementById('show-password-user<?= $index ?>').addEventListener('change', function() {
