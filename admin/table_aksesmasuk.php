@@ -691,14 +691,14 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
         <div class="modal-body">
           <div class="form-group">
             <label for="kodeakses">Kode Akses</label>
-            <input type="text" name="kodeakses" id="kodeakses" class="form-control" placeholder="masukan lewat sini...">
+            <input type="text" name="kodeakses" id="kodeakses" class="form-control" placeholder="masukan lewat sini..." required>
           </div>
           <div class="form-group">
             <label for="gambarqrcodeAkses" style="display: block;">Gambar QR-Code</label>
             <label for="gambarqrcodeAkses">
               <img src="default/user.png" alt="" width="200px" id="imgFotoCodeAkses">
             </label>
-            <input type="file" name="qrcode" id="gambarqrcodeAkses" class="form-control">
+            <input type="file" name="qrcode" id="gambarqrcodeAkses" class="form-control" required>
             <script>
               let imgFotoCodeAkses = document.getElementById("imgFotoCodeAkses");
               let gambarqrcodeAkses = document.getElementById("gambarqrcodeAkses");
@@ -736,7 +736,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             <input type="hidden" name="aksesid" id="aksesid" class="form-control" placeholder="masukan lewat sini..." value="<?= $data['aksesid'] ?>">
             <div class="form-group">
               <label for="kodeakses">Kode Akses</label>
-              <input type="text" name="kodeakses" id="kodeakses" class="form-control" placeholder="masukan lewat sini..." value="<?= $data['kodeakses'] ?>">
+              <input type="text" name="kodeakses" id="kodeakses" class="form-control" placeholder="masukan lewat sini..." value="<?= $data['kodeakses'] ?>" required>
             </div>
             <div class="form-group">
               <label for="gambarqrcodeAkses<?= $index ?>" style="display: block;">Gambar QR-Code</label>
