@@ -1,3 +1,12 @@
 Update Apk Web Absensi 16/07/2024
 - table_user.php (admin/table_user.php)
 - table_pelajar.php (admin/table_user.php)
+
+Update Apk Web Absensi 17/07/2024
+- table_user.php (admin/table_user.php)
+- table_pelajar.php (admin/table_user.php)
+- table_jurusan.php (admin/table_user.php)
+- table_kelas.php (admin/table_user.php)
+- table_aksesmasuk.php (admin/table_user.php)
+- login.php
+- login_akses.php
