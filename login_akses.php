@@ -502,7 +502,7 @@ if (isset($_SESSION['kodeakses'])) {
                                             <form action="proses_akses.php" method="POST">
                                                 <h4 class="mb-4 pb-3 text-light">Input</h4>
                                                 <div class="form-group mt-2">
-                                                    <input type="text" name="kodeakses" class="form-style" placeholder="Masukan Kode Akses" id="logpass" autocomplete="off">
+                                                    <input type="text" name="kodeakses" class="form-style" placeholder="Masukan Kode Akses" id="logpass" autocomplete="off" minlength="8" required>
                                                     <button type="submit" class="btn-submit mt-4">submit</button>
                                                 </div>
                                             </form>
