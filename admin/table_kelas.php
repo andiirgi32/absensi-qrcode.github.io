@@ -829,9 +829,6 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
               <option value="XII TSM B" <?= $data['namakelas'] == "XII TSM B" ? "selected" : "" ?>>XII TSM B</option>
               <option value="XII TKR" <?= $data['namakelas'] == "XII TKR" ? "selected" : "" ?>>XII TKR</option>
               <option value="XII TAV" <?= $data['namakelas'] == "XII TAV" ? "selected" : "" ?>>XII TAV</option>
-              <?php
-              if (mysqli_num_rows($sql))
-              ?>
               <option value="other">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
             </select>
             <input type="text" id="namakelasEdit_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" value="<?= $data['namakelas'] ?>" style="display: none;" required>
@@ -886,7 +883,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
             <input type="submit" value="Ubah" class="btn btn-success">
-            <button type="reset" class="btn btn-danger">Hapus</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
