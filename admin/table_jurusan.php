@@ -689,9 +689,105 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
         </div>
         <div class="modal-body">
           <label for="namajurusan">Jurusan</label>
-          <input type="text" class="form-control mb-2" id="namajurusan" name="namajurusan" placeholder="klik dan ketik disini...">
+          <select name="namajurusan" id="namajurusan" class="form-control mb-2" required>
+            <option value="">Pilihan</option>
+            <option value="TJKT">TJKT</option>
+            <option value="PPLG">PPLG</option>
+            <option value="DKV">DKV</option>
+            <option value="OTO">OTO</option>
+            <option value="INFOR">INFOR</option>
+            <option value="TAV">TAV</option>
+            <option value="RPL">RPL</option>
+            <option value="TSM">TSM</option>
+            <option value="TKR">TKR</option>
+            <option value="MM">MM</option>
+            <option value="other_jurusan">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
+          </select>
+          <input type="text" id="namajurusan_other" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" required>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const selectElement = document.getElementById('namajurusan');
+              const inputOther = document.getElementById('namajurusan_other');
+
+              selectElement.addEventListener('change', () => {
+                if (selectElement.value === 'other_jurusan') {
+                  inputOther.style.display = 'block';
+                  inputOther.required = true;
+                } else {
+                  inputOther.style.display = 'none';
+                  inputOther.required = false;
+                }
+              });
+
+              inputOther.addEventListener('input', () => {
+
+                const inputValue = inputOther.value.trim();
+
+                // Create a new option element
+                const newOption = document.createElement('option');
+                newOption.value = inputValue;
+                newOption.textContent = inputValue;
+
+                // Replace the existing second option (index 1) with the new option
+                selectElement.options[11] = new Option(newOption.textContent, newOption.value);
+
+                const SelectedCostumOption = selectElement.options[11];
+
+                // Set the new option as selected
+                SelectedCostumOption.selected = true;
+              });
+            });
+          </script>
           <label for="kepanjangan">Kepanjangan</label>
-          <input type="text" class="form-control mb-2" id="kepanjangan" name="kepanjangan" placeholder="klik dan ketik disini...">
+          <select name="kepanjangan" id="kepanjangan" class="form-control mb-2" required>
+            <option value="">Pilihan</option>
+            <option value="Teknik Jaringan Komputer dan Telekomunikasi">Teknik Jaringan Komputer dan Telekomunikasi</option>
+            <option value="Pengembangan Perangkat Lunak dan Gim">Pengembangan Perangkat Lunak dan Gim</option>
+            <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+            <option value="Otomotif">Otomotif</option>
+            <option value="Informatika">Informatika</option>
+            <option value="Teknik Audio dan Video">Teknik Audio dan Video</option>
+            <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+            <option value="Teknik Sepeda Motor">Teknik Sepeda Motor</option>
+            <option value="Teknik Kendaraan Ringan">Teknik Kendaraan Ringan</option>
+            <option value="Multimedia">Multimedia</option>
+            <option value="other_kepanjangan">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
+          </select>
+          <input type="text" id="kepanjangan_other" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" required>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const selectElement = document.getElementById('kepanjangan');
+              const inputOther = document.getElementById('kepanjangan_other');
+
+              selectElement.addEventListener('change', () => {
+                if (selectElement.value === 'other_kepanjangan') {
+                  inputOther.style.display = 'block';
+                  inputOther.required = true;
+                } else {
+                  inputOther.style.display = 'none';
+                  inputOther.required = false;
+                }
+              });
+
+              inputOther.addEventListener('input', () => {
+
+                const inputValue = inputOther.value.trim();
+
+                // Create a new option element
+                const newOption = document.createElement('option');
+                newOption.value = inputValue;
+                newOption.textContent = inputValue;
+
+                // Replace the existing second option (index 1) with the new option
+                selectElement.options[11] = new Option(newOption.textContent, newOption.value);
+
+                const SelectedCostumOption = selectElement.options[11];
+
+                // Set the new option as selected
+                SelectedCostumOption.selected = true;
+              });
+            });
+          </script>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
@@ -704,7 +800,23 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
   <!-- End Modal Scrollable -->
 
   <?php
-  foreach ($sql as $data) {
+  $jurusanArray = [
+    "TJKT" => "Teknik Jaringan Komputer dan Telekomunikasi",
+    "PPLG" => "Pengembangan Perangkat Lunak dan Gim",
+    "DKV" => "Desain Komunikasi Visual",
+    "OTO" => "Otomotif",
+    "INFOR" => "Informatika",
+    "TAV" => "Teknik Audio dan Video",
+    "RPL" => "Rekayasa Perangkat Lunak",
+    "TSM" => "Teknik Sepeda Motor",
+    "TKR" => "Teknik Kendaraan Ringan",
+    "MM" => "Multimedia"
+  ];
+
+  // Memisahkan antara nama jurusan dan kepanjangan
+  $namaJurusan = array_keys($jurusanArray);
+  $kepanjanganJurusan = array_values($jurusanArray);
+  foreach ($sql as $index => $data) {
   ?>
     <!-- Modal Scrollable -->
     <div class="modal fade" id="editJurusan<?= $data['jurusanid'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -717,16 +829,116 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
             </button>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control mb-2" id="jurusanid" name="jurusanid" placeholder="klik dan ketik disini..." value="<?= $data['jurusanid'] ?>" hidden>
-            <label for="namajurusan">Jurusan</label>
-            <input type="text" class="form-control mb-2" id="namajurusan" name="namajurusan" placeholder="klik dan ketik disini..." value="<?= $data['namajurusan'] ?>">
-            <label for="kepanjangan">Kepanjangan</label>
-            <input type="text" class="form-control mb-2" id="kepanjangan" name="kepanjangan" placeholder="klik dan ketik disini..." value="<?= $data['kepanjangan'] ?>">
+            <input type="text" class="form-control mb-2" id="jurusanid" name="jurusanid" placeholder="klik dan ketik disini..." value="<?= $data['jurusanid'] ?>" hidden required>
+            <label for="namajurusan<?= $index ?>">Jurusan</label>
+            <select name="namajurusan" id="namajurusan<?= $index ?>" class="form-control mb-2" required>
+              <?php if (!in_array($data['namajurusan'], $namaJurusan)) : ?>
+                <option value="<?= $data['namajurusan'] ?>" selected><?= $data['namajurusan'] ?></option>
+              <?php endif; ?>
+              <option value="TJKT" <?= $data['namajurusan'] == "TJKT" ? "selected" : "" ?>>TJKT</option>
+              <option value="PPLG" <?= $data['namajurusan'] == "PPLG" ? "selected" : "" ?>>PPLG</option>
+              <option value="DKV" <?= $data['namajurusan'] == "DKV" ? "selected" : "" ?>>DKV</option>
+              <option value="OTO" <?= $data['namajurusan'] == "OTO" ? "selected" : "" ?>>OTO</option>
+              <option value="INFOR" <?= $data['namajurusan'] == "INFOR" ? "selected" : "" ?>>INFOR</option>
+              <option value="TAV" <?= $data['namajurusan'] == "TAV" ? "selected" : "" ?>>TAV</option>
+              <option value="RPL" <?= $data['namajurusan'] == "RPL" ? "selected" : "" ?>>RPL</option>
+              <option value="TSM" <?= $data['namajurusan'] == "TSM" ? "selected" : "" ?>>TSM</option>
+              <option value="TKR" <?= $data['namajurusan'] == "TKR" ? "selected" : "" ?>>TKR</option>
+              <option value="MM" <?= $data['namajurusan'] == "MM" ? "selected" : "" ?>>MM</option>
+              <option value="other_jurusan<?= $index ?>">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
+            </select>
+            <input type="text" id="namajurusan_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" value="<?= $data['namajurusan'] ?>" required>
+            <script>
+              document.addEventListener('DOMContentLoaded', () => {
+                const selectElement = document.getElementById('namajurusan<?= $index ?>');
+                const inputOther = document.getElementById('namajurusan_other<?= $index ?>');
+
+                selectElement.addEventListener('change', () => {
+                  if (selectElement.value === 'other_jurusan<?= $index ?>') {
+                    inputOther.style.display = 'block';
+                    inputOther.required = true;
+                  } else {
+                    inputOther.style.display = 'none';
+                    inputOther.required = false;
+                  }
+                });
+
+                inputOther.addEventListener('input', () => {
+
+                  const inputValue = inputOther.value.trim();
+
+                  // Create a new option element
+                  const newOption = document.createElement('option');
+                  newOption.value = inputValue;
+                  newOption.textContent = inputValue;
+
+                  // Replace the existing second option (index 1) with the new option
+                  selectElement.options[11] = new Option(newOption.textContent, newOption.value);
+
+                  const SelectedCostumOption = selectElement.options[11];
+
+                  // Set the new option as selected
+                  SelectedCostumOption.selected = true;
+                });
+              });
+            </script>
+            <label for="kepanjangan<?= $index ?>">Kepanjangan</label>
+            <select name="kepanjangan" id="kepanjangan<?= $index ?>" class="form-control mb-2" required>
+              <?php if (!in_array($data['kepanjangan'], $kepanjanganJurusan)) : ?>
+                <option value="<?= $data['kepanjangan'] ?>" selected><?= $data['kepanjangan'] ?></option>
+              <?php endif; ?>
+              <option value="Teknik Jaringan Komputer dan Telekomunikasi" <?= $data['kepanjangan'] == "Teknik Jaringan Komputer dan Telekomunikasi" ? "selected" : "" ?>>Teknik Jaringan Komputer dan Telekomunikasi</option>
+              <option value="Pengembangan Perangkat Lunak dan Gim" <?= $data['kepanjangan'] == "Pengembangan Perangkat Lunak dan Gim" ? "selected" : "" ?>>Pengembangan Perangkat Lunak dan Gim</option>
+              <option value="Desain Komunikasi Visual" <?= $data['kepanjangan'] == "Desain Komunikasi Visual" ? "selected" : "" ?>>Desain Komunikasi Visual</option>
+              <option value="Otomotif" <?= $data['kepanjangan'] == "Otomotif" ? "selected" : "" ?>>Otomotif</option>
+              <option value="Informatika" <?= $data['kepanjangan'] == "Informatika" ? "selected" : "" ?>>Informatika</option>
+              <option value="Teknik Audio dan Video" <?= $data['kepanjangan'] == "Teknik Audio dan Video" ? "selected" : "" ?>>Teknik Audio dan Video</option>
+              <option value="Rekayasa Perangkat Lunak" <?= $data['kepanjangan'] == "Rekayasa Perangkat Lunak" ? "selected" : "" ?>>Rekayasa Perangkat Lunak</option>
+              <option value="Teknik Sepeda Motor" <?= $data['kepanjangan'] == "Teknik Sepeda Motor" ? "selected" : "" ?>>Teknik Sepeda Motor</option>
+              <option value="Teknik Kendaraan Ringan" <?= $data['kepanjangan'] == "Teknik Kendaraan Ringan" ? "selected" : "" ?>>Teknik Kendaraan Ringan</option>
+              <option value="Multimedia" <?= $data['kepanjangan'] == "Multimedia" ? "selected" : "" ?>>Multimedia</option>
+              <option value="other_kepanjangan">Lainnya</option> <!-- Opsi untuk menampilkan input teks -->
+            </select>
+            <input type="text" id="kepanjangan_other<?= $index ?>" class="form-control mb-2" placeholder="Masukkan kelas lainnya" style="display: none;" value="<?= $data['kepanjangan'] ?>" required>
+            <script>
+              document.addEventListener('DOMContentLoaded', () => {
+                const selectElement = document.getElementById('kepanjangan<?= $index ?>');
+                const inputOther = document.getElementById('kepanjangan_other<?= $index ?>');
+
+                selectElement.addEventListener('change', () => {
+                  if (selectElement.value === 'other_kepanjangan') {
+                    inputOther.style.display = 'block';
+                    inputOther.required = true;
+                  } else {
+                    inputOther.style.display = 'none';
+                    inputOther.required = false;
+                  }
+                });
+
+                inputOther.addEventListener('input', () => {
+
+                  const inputValue = inputOther.value.trim();
+
+                  // Create a new option element
+                  const newOption = document.createElement('option');
+                  newOption.value = inputValue;
+                  newOption.textContent = inputValue;
+
+                  // Replace the existing second option (index 1) with the new option
+                  selectElement.options[11] = new Option(newOption.textContent, newOption.value);
+
+                  const SelectedCostumOption = selectElement.options[11];
+
+                  // Set the new option as selected
+                  SelectedCostumOption.selected = true;
+                });
+              });
+            </script>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
             <input type="submit" value="Ubah" class="btn btn-success">
-            <button type="reset" class="btn btn-danger">Hapus</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
