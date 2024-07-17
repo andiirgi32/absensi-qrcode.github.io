@@ -757,7 +757,7 @@ $get_data_semua_user = mysqli_num_rows($get_sql_semua_user);
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
             <input type="submit" value="Ubah" class="btn btn-success">
-            <button type="reset" class="btn btn-danger">Hapus</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
