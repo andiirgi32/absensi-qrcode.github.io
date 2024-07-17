@@ -107,10 +107,10 @@ if (isset($_SESSION['userid'])) {
             <form action="admin/proses_login.php" method="post" enctype="multipart/form-data">
                 <h3 class="h3 text-shadow-dark">Login</h3>
                 <div class="form-holder">
-                    <input type="text" class="form-control mb-2" id="username" name="username" placeholder="Username Or Email">
+                    <input type="text" class="form-control mb-2" id="username" name="username" placeholder="Username Or Email" required>
                 </div>
                 <div class="form-holder">
-                    <input type="password" class="form-control mb-2" id="password" name="password" placeholder="Password">
+                    <input type="password" class="form-control mb-2" id="password" name="password" placeholder="Password" minlength="8" required>
                     <input type="checkbox" id="show-password"> <label for="show-password">Tampilkan Sandi</label>
                     <script>
                         document.getElementById('show-password').addEventListener('change', function() {
